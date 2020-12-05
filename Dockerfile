@@ -30,4 +30,4 @@ ENV PYTHONUNBUFFERED 1
 COPY ./app-demo-frontend/ /app
 ENV PATH="/opt/venv/bin:$PATH"
  
-CMD python /app/main.py
+ENTRYPOINT ["python","/app/main.py"]
