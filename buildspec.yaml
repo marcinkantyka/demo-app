@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      docker: 19
+      docker: 18
     commands:
       - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
   pre_build:
