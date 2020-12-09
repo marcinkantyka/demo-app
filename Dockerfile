@@ -1,4 +1,3 @@
- 
 FROM python:3.7.5-slim-buster AS compile-image
 
  
@@ -14,6 +13,7 @@ RUN pip install -r requirements.txt
 
  
 FROM python:3.7.5-slim-buster AS runtime-image
+
  
 COPY --from=compile-image /opt/venv /opt/venv
 WORKDIR /app
