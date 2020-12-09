@@ -4,8 +4,8 @@ phases:
   install:
     runtime-versions:
       docker: 19
-	commands:
-	  - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+    commands:
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
