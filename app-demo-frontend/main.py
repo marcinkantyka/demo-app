@@ -14,7 +14,7 @@ def index():
     host=(socket.gethostname())
 
     body_msg = 'World'
-    title_msg = 'Hello Ergo!'
+    title_msg = 'Hello Ergo !'
     return render_template('index.html', title=title_msg, msg=body_msg, from_host=host)
     
 
