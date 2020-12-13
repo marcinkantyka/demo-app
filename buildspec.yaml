@@ -11,7 +11,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - REPOSITORY_URI=306258791377.dkr.ecr.eu-central-1.amazonaws.com/ergo-poc-ecr:1.0
+      - REPOSITORY_URI=306258791377.dkr.ecr.eu-central-1.amazonaws.com/ergo-poc-ecr
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
 
@@ -20,12 +20,12 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t ergo-poc-ecr:1.0 . 
-      - docker tag ergo-poc-ecr:1.0 306258791377.dkr.ecr.eu-central-1.amazonaws.com/ergo-poc-ecr:1.0
+      - docker tag ergo-poc-ecr:1.0 ${REPOSITORY_URI}:${IMAGE_TAG} 
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push 306258791377.dkr.ecr.eu-central-1.amazonaws.com/ergo-poc-ecr:1.0
+      - docker push ${REPOSITORY_URI}:${IMAGE_TAG}
       - echo Writing image definitions file...
       - printf '[{"name":"ergo-poc-ecr","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
