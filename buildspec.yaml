@@ -11,7 +11,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - REPOSITORY_URI=306258791377.dkr.ecr.eu-central-1.amazonaws.com/ergo-poc-ecr
+      - REPOSITORY_URI=306258791377.dkr.ecr.eu-central-1.amazonaws.com/ergo-poc-ecr:1.0
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
 
